@@ -1,0 +1,14 @@
+# build artifacts
+data/processed/*.mat
+figures/
+reports/*.html
+reports/*.kml
+reports/*.gpx
+reports/*.txt
+reports/*.md
+
+# editor
+*.asv
+*.m~
+.DS_Store
+Thumbs.db

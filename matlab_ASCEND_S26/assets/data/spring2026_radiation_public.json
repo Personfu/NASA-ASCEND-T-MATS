@@ -1,0 +1,724 @@
+{
+  "mission": "Spring 2026 KA7NSR-15 public radiation summary",
+  "public_release": "Derived minute-level beta/gamma radiation telemetry. Raw workbook rows, formulas, and full timing detail are not published here.",
+  "alignment_note": "Geiger local clock aligned to APRS launch at 2026-03-28 09:38:54 Arizona MST.",
+  "summary": {
+    "samples": 88,
+    "burst_alt_ft": 82498,
+    "pfotzer_regener_alt_ft": 63300,
+    "peak_cpm": 524.0,
+    "peak_usv_h": 3.406,
+    "peak_radiation_elapsed_s": 2706.0,
+    "peak_radiation_alt_ft": 62449.3,
+    "nearest_pfotzer_sample_alt_ft": 63554.2,
+    "nearest_pfotzer_sample_cpm": 467.0,
+    "mean_cpm": 245.0,
+    "mean_usv_h": 1.593
+  },
+  "samples": [
+    {
+      "elapsed_s": 6.0,
+      "seconds_day": 34740,
+      "alt_ft": 1375.2,
+      "cpm": 22.0,
+      "usv_h": 0.143,
+      "phase": "PRE-FLIGHT"
+    },
+    {
+      "elapsed_s": 66.0,
+      "seconds_day": 34800,
+      "alt_ft": 1387.7,
+      "cpm": 33.0,
+      "usv_h": 0.214,
+      "phase": "PRE-FLIGHT"
+    },
+    {
+      "elapsed_s": 126.0,
+      "seconds_day": 34860,
+      "alt_ft": 1400.1,
+      "cpm": 23.0,
+      "usv_h": 0.149,
+      "phase": "PRE-FLIGHT"
+    },
+    {
+      "elapsed_s": 186.0,
+      "seconds_day": 34920,
+      "alt_ft": 1412.5,
+      "cpm": 21.0,
+      "usv_h": 0.137,
+      "phase": "PRE-FLIGHT"
+    },
+    {
+      "elapsed_s": 246.0,
+      "seconds_day": 34980,
+      "alt_ft": 1424.9,
+      "cpm": 19.0,
+      "usv_h": 0.123,
+      "phase": "PRE-FLIGHT"
+    },
+    {
+      "elapsed_s": 306.0,
+      "seconds_day": 35040,
+      "alt_ft": 1437.4,
+      "cpm": 26.0,
+      "usv_h": 0.169,
+      "phase": "PRE-FLIGHT"
+    },
+    {
+      "elapsed_s": 366.0,
+      "seconds_day": 35100,
+      "alt_ft": 1449.8,
+      "cpm": 25.0,
+      "usv_h": 0.162,
+      "phase": "PRE-FLIGHT"
+    },
+    {
+      "elapsed_s": 426.0,
+      "seconds_day": 35160,
+      "alt_ft": 1482.8,
+      "cpm": 20.0,
+      "usv_h": 0.13,
+      "phase": "PRE-FLIGHT"
+    },
+    {
+      "elapsed_s": 486.0,
+      "seconds_day": 35220,
+      "alt_ft": 2701.8,
+      "cpm": 12.0,
+      "usv_h": 0.078,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 546.0,
+      "seconds_day": 35280,
+      "alt_ft": 4052.4,
+      "cpm": 10.0,
+      "usv_h": 0.065,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 606.0,
+      "seconds_day": 35340,
+      "alt_ft": 5476.1,
+      "cpm": 16.0,
+      "usv_h": 0.104,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 666.0,
+      "seconds_day": 35400,
+      "alt_ft": 6829.3,
+      "cpm": 21.0,
+      "usv_h": 0.137,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 726.0,
+      "seconds_day": 35460,
+      "alt_ft": 8108.1,
+      "cpm": 22.0,
+      "usv_h": 0.143,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 786.0,
+      "seconds_day": 35520,
+      "alt_ft": 9403.3,
+      "cpm": 21.0,
+      "usv_h": 0.137,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 846.0,
+      "seconds_day": 35580,
+      "alt_ft": 10712.1,
+      "cpm": 25.0,
+      "usv_h": 0.162,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 906.0,
+      "seconds_day": 35640,
+      "alt_ft": 12060.0,
+      "cpm": 37.0,
+      "usv_h": 0.241,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 966.0,
+      "seconds_day": 35700,
+      "alt_ft": 13427.8,
+      "cpm": 30.0,
+      "usv_h": 0.195,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1026.0,
+      "seconds_day": 35760,
+      "alt_ft": 14716.1,
+      "cpm": 47.0,
+      "usv_h": 0.306,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1086.0,
+      "seconds_day": 35820,
+      "alt_ft": 16101.5,
+      "cpm": 39.0,
+      "usv_h": 0.254,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1146.0,
+      "seconds_day": 35880,
+      "alt_ft": 17489.9,
+      "cpm": 48.0,
+      "usv_h": 0.312,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1206.0,
+      "seconds_day": 35940,
+      "alt_ft": 18929.6,
+      "cpm": 58.0,
+      "usv_h": 0.377,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1266.0,
+      "seconds_day": 36000,
+      "alt_ft": 20436.1,
+      "cpm": 75.0,
+      "usv_h": 0.488,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1326.0,
+      "seconds_day": 36060,
+      "alt_ft": 21923.0,
+      "cpm": 79.0,
+      "usv_h": 0.513,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1386.0,
+      "seconds_day": 36120,
+      "alt_ft": 23436.6,
+      "cpm": 101.0,
+      "usv_h": 0.656,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1446.0,
+      "seconds_day": 36180,
+      "alt_ft": 25017.5,
+      "cpm": 107.0,
+      "usv_h": 0.696,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1506.0,
+      "seconds_day": 36240,
+      "alt_ft": 26652.9,
+      "cpm": 139.0,
+      "usv_h": 0.904,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1566.0,
+      "seconds_day": 36300,
+      "alt_ft": 28384.2,
+      "cpm": 167.0,
+      "usv_h": 1.086,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1626.0,
+      "seconds_day": 36360,
+      "alt_ft": 30150.3,
+      "cpm": 170.0,
+      "usv_h": 1.105,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1686.0,
+      "seconds_day": 36420,
+      "alt_ft": 31858.6,
+      "cpm": 194.0,
+      "usv_h": 1.261,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1746.0,
+      "seconds_day": 36480,
+      "alt_ft": 33558.9,
+      "cpm": 252.0,
+      "usv_h": 1.638,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1806.0,
+      "seconds_day": 36540,
+      "alt_ft": 35160.2,
+      "cpm": 247.0,
+      "usv_h": 1.605,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1866.0,
+      "seconds_day": 36600,
+      "alt_ft": 36883.0,
+      "cpm": 249.0,
+      "usv_h": 1.618,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1926.0,
+      "seconds_day": 36660,
+      "alt_ft": 38600.2,
+      "cpm": 325.0,
+      "usv_h": 2.112,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 1986.0,
+      "seconds_day": 36720,
+      "alt_ft": 40345.7,
+      "cpm": 339.0,
+      "usv_h": 2.204,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2046.0,
+      "seconds_day": 36780,
+      "alt_ft": 42127.2,
+      "cpm": 376.0,
+      "usv_h": 2.444,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2106.0,
+      "seconds_day": 36840,
+      "alt_ft": 43919.8,
+      "cpm": 390.0,
+      "usv_h": 2.535,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2166.0,
+      "seconds_day": 36900,
+      "alt_ft": 45753.2,
+      "cpm": 409.0,
+      "usv_h": 2.658,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2226.0,
+      "seconds_day": 36960,
+      "alt_ft": 47553.2,
+      "cpm": 459.0,
+      "usv_h": 2.984,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2286.0,
+      "seconds_day": 37020,
+      "alt_ft": 49423.7,
+      "cpm": 496.0,
+      "usv_h": 3.224,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2346.0,
+      "seconds_day": 37080,
+      "alt_ft": 51320.2,
+      "cpm": 456.0,
+      "usv_h": 2.964,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2406.0,
+      "seconds_day": 37140,
+      "alt_ft": 53370.0,
+      "cpm": 436.0,
+      "usv_h": 2.834,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2466.0,
+      "seconds_day": 37200,
+      "alt_ft": 55419.9,
+      "cpm": 494.0,
+      "usv_h": 3.211,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2526.0,
+      "seconds_day": 37260,
+      "alt_ft": 57598.6,
+      "cpm": 483.0,
+      "usv_h": 3.139,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2586.0,
+      "seconds_day": 37320,
+      "alt_ft": 59559.8,
+      "cpm": 489.0,
+      "usv_h": 3.178,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2646.0,
+      "seconds_day": 37380,
+      "alt_ft": 61032.0,
+      "cpm": 494.0,
+      "usv_h": 3.211,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2706.0,
+      "seconds_day": 37440,
+      "alt_ft": 62449.3,
+      "cpm": 524.0,
+      "usv_h": 3.406,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2766.0,
+      "seconds_day": 37500,
+      "alt_ft": 63978.9,
+      "cpm": 503.0,
+      "usv_h": 3.27,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2826.0,
+      "seconds_day": 37560,
+      "alt_ft": 65327.2,
+      "cpm": 500.0,
+      "usv_h": 3.25,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2886.0,
+      "seconds_day": 37620,
+      "alt_ft": 66543.7,
+      "cpm": 481.0,
+      "usv_h": 3.126,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 2946.0,
+      "seconds_day": 37680,
+      "alt_ft": 67754.7,
+      "cpm": 460.0,
+      "usv_h": 2.99,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3006.0,
+      "seconds_day": 37740,
+      "alt_ft": 69078.6,
+      "cpm": 463.0,
+      "usv_h": 3.01,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3066.0,
+      "seconds_day": 37800,
+      "alt_ft": 70418.4,
+      "cpm": 485.0,
+      "usv_h": 3.152,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3126.0,
+      "seconds_day": 37860,
+      "alt_ft": 71754.7,
+      "cpm": 483.0,
+      "usv_h": 3.139,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3186.0,
+      "seconds_day": 37920,
+      "alt_ft": 73012.6,
+      "cpm": 463.0,
+      "usv_h": 3.01,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3246.0,
+      "seconds_day": 37980,
+      "alt_ft": 74223.3,
+      "cpm": 460.0,
+      "usv_h": 2.99,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3306.0,
+      "seconds_day": 38040,
+      "alt_ft": 75564.6,
+      "cpm": 450.0,
+      "usv_h": 2.925,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3366.0,
+      "seconds_day": 38100,
+      "alt_ft": 76926.6,
+      "cpm": 432.0,
+      "usv_h": 2.808,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3426.0,
+      "seconds_day": 38160,
+      "alt_ft": 78163.2,
+      "cpm": 418.0,
+      "usv_h": 2.717,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3486.0,
+      "seconds_day": 38220,
+      "alt_ft": 79383.7,
+      "cpm": 397.0,
+      "usv_h": 2.58,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3546.0,
+      "seconds_day": 38280,
+      "alt_ft": 80594.8,
+      "cpm": 391.0,
+      "usv_h": 2.542,
+      "phase": "ASCENT"
+    },
+    {
+      "elapsed_s": 3606.0,
+      "seconds_day": 38340,
+      "alt_ft": 81784.3,
+      "cpm": 380.0,
+      "usv_h": 2.47,
+      "phase": "BURST"
+    },
+    {
+      "elapsed_s": 3666.0,
+      "seconds_day": 38400,
+      "alt_ft": 81028.5,
+      "cpm": 409.0,
+      "usv_h": 2.658,
+      "phase": "BURST"
+    },
+    {
+      "elapsed_s": 3726.0,
+      "seconds_day": 38460,
+      "alt_ft": 77354.8,
+      "cpm": 445.0,
+      "usv_h": 2.892,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 3786.0,
+      "seconds_day": 38520,
+      "alt_ft": 73681.1,
+      "cpm": 506.0,
+      "usv_h": 3.289,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 3846.0,
+      "seconds_day": 38580,
+      "alt_ft": 68570.1,
+      "cpm": 467.0,
+      "usv_h": 3.036,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 3906.0,
+      "seconds_day": 38640,
+      "alt_ft": 63554.2,
+      "cpm": 467.0,
+      "usv_h": 3.036,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 3966.0,
+      "seconds_day": 38700,
+      "alt_ft": 58964.0,
+      "cpm": 508.0,
+      "usv_h": 3.302,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4026.0,
+      "seconds_day": 38760,
+      "alt_ft": 55127.0,
+      "cpm": 458.0,
+      "usv_h": 2.977,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4086.0,
+      "seconds_day": 38820,
+      "alt_ft": 51393.9,
+      "cpm": 429.0,
+      "usv_h": 2.789,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4206.0,
+      "seconds_day": 38940,
+      "alt_ft": 44846.1,
+      "cpm": 404.0,
+      "usv_h": 2.626,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4266.0,
+      "seconds_day": 39000,
+      "alt_ft": 41893.9,
+      "cpm": 356.0,
+      "usv_h": 2.314,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4326.0,
+      "seconds_day": 39060,
+      "alt_ft": 39096.8,
+      "cpm": 310.0,
+      "usv_h": 2.015,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4386.0,
+      "seconds_day": 39120,
+      "alt_ft": 36386.0,
+      "cpm": 285.0,
+      "usv_h": 1.852,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4446.0,
+      "seconds_day": 39180,
+      "alt_ft": 33976.8,
+      "cpm": 219.0,
+      "usv_h": 1.423,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4506.0,
+      "seconds_day": 39240,
+      "alt_ft": 31647.9,
+      "cpm": 168.0,
+      "usv_h": 1.092,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4566.0,
+      "seconds_day": 39300,
+      "alt_ft": 29359.0,
+      "cpm": 180.0,
+      "usv_h": 1.17,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4626.0,
+      "seconds_day": 39360,
+      "alt_ft": 27216.0,
+      "cpm": 118.0,
+      "usv_h": 0.767,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4686.0,
+      "seconds_day": 39420,
+      "alt_ft": 25132.8,
+      "cpm": 121.0,
+      "usv_h": 0.786,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4746.0,
+      "seconds_day": 39480,
+      "alt_ft": 23189.1,
+      "cpm": 93.0,
+      "usv_h": 0.604,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4806.0,
+      "seconds_day": 39540,
+      "alt_ft": 21255.8,
+      "cpm": 77.0,
+      "usv_h": 0.501,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4866.0,
+      "seconds_day": 39600,
+      "alt_ft": 19423.5,
+      "cpm": 47.0,
+      "usv_h": 0.306,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4926.0,
+      "seconds_day": 39660,
+      "alt_ft": 17614.2,
+      "cpm": 45.0,
+      "usv_h": 0.292,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 4986.0,
+      "seconds_day": 39720,
+      "alt_ft": 15785.9,
+      "cpm": 45.0,
+      "usv_h": 0.292,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 5046.0,
+      "seconds_day": 39780,
+      "alt_ft": 14019.7,
+      "cpm": 39.0,
+      "usv_h": 0.254,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 5106.0,
+      "seconds_day": 39840,
+      "alt_ft": 12296.2,
+      "cpm": 24.0,
+      "usv_h": 0.156,
+      "phase": "DESCENT"
+    },
+    {
+      "elapsed_s": 5166.0,
+      "seconds_day": 39900,
+      "alt_ft": 10692.0,
+      "cpm": 22.0,
+      "usv_h": 0.143,
+      "phase": "LANDED"
+    },
+    {
+      "elapsed_s": 5226.0,
+      "seconds_day": 39960,
+      "alt_ft": 9100.0,
+      "cpm": 13.0,
+      "usv_h": 0.084,
+      "phase": "LANDED"
+    },
+    {
+      "elapsed_s": 5286.0,
+      "seconds_day": 40020,
+      "alt_ft": 7571.0,
+      "cpm": 15.0,
+      "usv_h": 0.097,
+      "phase": "LANDED"
+    }
+  ]
+}
