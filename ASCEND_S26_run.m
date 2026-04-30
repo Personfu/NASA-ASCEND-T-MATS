@@ -179,6 +179,21 @@ try, viz_payload_3d_render(PS, cfg); catch ME, warning('payload 3D: %s', ME.mess
 try, viz_website_overlay(D, cfg);    catch ME, warning('website overlay: %s', ME.message); end
 try, viz_gforce_burst(D, cfg);       catch ME, warning('gforce burst: %s', ME.message); end
 
+% --- payload engineering layer (Personfu / Phoenix-1 carbon-fiber body) -----
+fprintf('\n=== PAYLOAD ENGINEERING (Phoenix-1) ===\n');
+PE = payload_engineering();
+fprintf('  m=%.3f kg | CG=[%.3f %.3f %.3f] m | I_diag=[%.4f %.4f %.4f] kg m^2\n', ...
+    PE.totals.mass_kg, PE.totals.CG_m, PE.totals.I_diag_kgm2);
+save(fullfile(cfg.paths.data_proc,'payload_engineering.mat'),'PE');
+try, viz_payload_cad(PE, cfg);              catch ME, warning('payload CAD: %s', ME.message); end
+try, viz_payload_structural(PE, cfg);       catch ME, warning('payload struct: %s', ME.message); end
+try, viz_payload_thermal_skin(PE, cfg, D);  catch ME, warning('payload thermal: %s', ME.message); end
+try, viz_payload_aero(PE, cfg);             catch ME, warning('payload aero: %s', ME.message); end
+try, viz_payload_power(PE, cfg);            catch ME, warning('payload power: %s', ME.message); end
+try, viz_payload_link_budget(PE, D, cfg);   catch ME, warning('payload link: %s', ME.message); end
+try, viz_payload_sensors(PE, D, cfg);       catch ME, warning('payload sensors: %s', ME.message); end
+try, export_payload_bom(PE, cfg);           catch ME, warning('payload bom: %s', ME.message); end
+
 % --- exports (KML / GPX)
 fprintf('\n=== EXPORTS ===\n');
 try, export_kml(D, track, cfg); catch ME, warning('KML export: %s', ME.message); end
@@ -195,7 +210,7 @@ results = struct('cfg',cfg,'D',D,'track',track,'sim',sim, ...
                  'thermal',thermal,'power',power, ...
                  'PS',PS,'wind',wind,'link',link,'B_apex',B_apex, ...
                  'MC',MC,'val',val,'arduino_fused',arduino_fused, ...
-                 'events',events,'FD',FD);
+                 'events',events,'FD',FD,'PE',PE);
 fprintf('\n[ASCEND-S26] Pipeline complete.\n');
 end
 

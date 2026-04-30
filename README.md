@@ -172,3 +172,71 @@ After `ASCEND_S26_run()` completes, the following artifacts are produced:
 
 Designed and authored by *Personfu* for the Phoenix College NASA ASCEND
 program, Spring 2026.
+
+---
+
+## Phoenix-1 Payload Showcase (Spring 2026)
+
+The Phoenix College carbon-fiber 3 lb payload is now fully reconstructed in
+MATLAB end-to-end.  The single entry point that runs every Fundamental and
+Advanced engineering / coding / physics / data-sim module against the
+flight payload is:
+
+`matlab
+results = payload_showcase();                      % uses simulated flight
+results = payload_showcase('csv','asusux.csv');    % uses real V1f log
+`
+
+### What it runs (in order)
+
+1. `firmware_decode_csv` - decode the 37-column `asusux.csv` exactly the way
+   `HailMaryV1f.ino` writes it, including packed `bno_cal` / `health`
+   bytes, scaled-integer GPS, and derived columns.
+2. `firmware_simulate_flight` - firmware-in-the-loop synthetic mission used
+   when no CSV is provided.
+3. `firmware_health_summary` - per-sensor uptime, stale streaks, free-RAM
+   trace, phase durations, and re-run impact detection.
+4. `viz_payload_cad` / `viz_payload_structural` /
+   `viz_payload_thermal_skin` / `viz_payload_aero` /
+   `viz_payload_power` / `viz_payload_link_budget` /
+   `viz_payload_sensors` - the payload engineering dashboards.
+5. `viz_firmware_replay` - 6-panel telemetry replay (altitude with phase
+   shading, vertical velocity, accel magnitude with 15 g impact line, UV
+   totals, sensor health raster, staleness + free RAM).
+6. `viz_payload_dynamics` - tilt, `|omega|`, rotational KE, angular momentum,
+   complementary-filter attitude, and roll vs roll-rate phase plane.
+7. `viz_payload_vibration` - Welch PSD per axis, `|a|` STFT spectrogram,
+   descent-phase acceleration histogram.
+8. `viz_payload_kalman` - constant-acceleration Kalman fusion of the BMP
+   altitude with the BNO055 vertical accel, exposing the filtered `v_z` state.
+9. `viz_payload_allan` - overlapping Allan deviation of the BNO055 gyro
+   axes from the ground-phase samples (ARW / bias instability / RRW).
+10. `viz_payload_uv_atmo` - Beer-Lambert fit `I(h) = I_inf * exp(-tau * exp(-h/H))`
+    to the AS7331 x4 average, plus inter-sensor agreement trace.
+11. `viz_payload_montecarlo` - 500-trial parachute / mass / wind / burst-
+    altitude descent dispersion with 1 sigma and 2 sigma landing ellipse and
+    drift-range histogram.
+12. `export_payload_bom` - writes `reports/payload_bom.csv` and
+    `reports/payload_engineering.md`.
+13. Firmware self-tests - regenerates the 44-byte UBX-CFG-NAV5 Airborne <1g>
+    packet and round-trips a GPS fix through the EEPROM pack/unpack helpers.
+
+### Firmware archive
+
+The exact flight firmware is archived under `arduino/HailMaryV1f/` and the
+matching MATLAB companion lives in `src/firmware/`:
+
+`
+arduino/HailMaryV1f/HailMaryV1f.ino
+arduino/docs/V1f_FIRMWARE_REFERENCE.md
+src/firmware/firmware_decode_csv.m
+src/firmware/firmware_decode_packed.m
+src/firmware/firmware_validate_data.m
+src/firmware/firmware_flight_phase.m
+src/firmware/firmware_detect_impact.m
+src/firmware/firmware_health_summary.m
+src/firmware/firmware_eeprom_pack.m
+src/firmware/firmware_eeprom_unpack.m
+src/firmware/firmware_ubx_airborne.m
+src/firmware/firmware_simulate_flight.m
+`
