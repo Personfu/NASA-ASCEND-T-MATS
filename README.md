@@ -36,14 +36,32 @@
 
 ## 1. Repository Overview
 
-This repository contains **two integrated codebases**:
+This repository contains **three integrated codebases**:
 
 | Sub-project | Language | Purpose |
 |---|---|---|
-| **T-MATS** (`T-MATS/T-MATS-master/`) | MATLAB / Simulink / C | NASA thermodynamic simulation toolbox — turbomachinery, gas dynamics, propulsion |
+| **T-MATS** (`T-MATS/T-MATS/`) | MATLAB / Simulink / C | NASA thermodynamic simulation toolbox — turbomachinery, gas dynamics, propulsion |
 | **ASCEND-S26** (`matlab_ASCEND_S26/`) | MATLAB | Phoenix College NASA ASCEND Spring 2026 — balloon flight reconstruction, firmware analysis, science data processing |
+| **Near-Space Engineering Toolkit** (`engineering/`) | Python | Physics-first, fully-runnable HAB payload analysis (atmosphere, buoyancy, ascent/descent, thermal, RF, trajectory) — inspired by Arizona Near Space Research (ANSR), validated against NASA/NOAA/NIST/FAA public data |
 
-Both sub-projects are built and tested against **MATLAB R2023b or later** (R2024a recommended). The T-MATS Simulink library additionally requires the Simulink and Aerospace Toolboxes; the ASCEND suite requires only base MATLAB with the Signal Processing Toolbox for spectral analyses.
+The MATLAB sub-projects are built and tested against **MATLAB R2023b or later** (R2024a recommended). The T-MATS Simulink library additionally requires the Simulink and Aerospace Toolboxes; the ASCEND suite requires only base MATLAB with the Signal Processing Toolbox for spectral analyses. The **Near-Space Engineering Toolkit runs on any platform with `python3 + numpy + matplotlib`** — no MATLAB license, no internet — and reproduces the U.S. Standard Atmosphere 1976 tables to better than 0.001 %.
+
+### Near-Space Engineering Toolkit (`engineering/`) — at a glance
+
+A pure-physics, citation-backed analysis suite that turns a NASA ASCEND / ANSR
+balloon flight into an auditable systems-engineering problem. Eight models
+(`atmosphere`, `lift_gas`, `balloon`, `descent`, `thermal`, `comms`, `flight`),
+six runnable example studies that emit publication-quality figures, a validation
+suite, reference data tables, and a deep cited documentation set under
+`engineering/docs/` (including [`07_TMATS_BRIDGE.md`](engineering/docs/07_TMATS_BRIDGE.md),
+which maps T-MATS' thermodynamic and Newton-Raphson methods onto balloon-payload
+engineering). Start at [`engineering/README.md`](engineering/README.md).
+
+```bash
+cd engineering && pip install -r requirements.txt
+python3 tests/test_validation.py          # validate physics vs USSA-1976
+python3 examples/run_full_mission.py      # full mission report + dashboard
+```
 
 ---
 

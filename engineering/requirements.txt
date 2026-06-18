@@ -1,0 +1,6 @@
+# Near-Space Engineering Toolkit dependencies
+# Pure-Python scientific stack; no compiled or proprietary dependencies.
+numpy>=1.24
+matplotlib>=3.6
+# Optional: pytest for running tests/ as a suite (the suite also runs standalone)
+# pytest>=7.0
