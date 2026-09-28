@@ -1,0 +1,29 @@
+name: Near-space model validation
+
+on:
+  push:
+    paths:
+      - "engineering/**"
+      - ".github/workflows/nearspace-validation.yml"
+  pull_request:
+    paths:
+      - "engineering/**"
+      - ".github/workflows/nearspace-validation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-python-models:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install engineering dependencies
+        run: python -m pip install -r engineering/requirements.txt
+      - name: Run atmospheric and flight-model regression suite
+        run: python engineering/tests/test_validation.py
+      - name: Compile model and test modules
+        run: python -m compileall -q engineering/nearspace engineering/tests

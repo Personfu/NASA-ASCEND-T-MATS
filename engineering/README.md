@@ -1,6 +1,6 @@
 # Near-Space Engineering Toolkit (`engineering/`)
 
-> **A physics-first, fully-runnable engineering analysis suite for high-altitude
+> **An educational, physics-first engineering analysis suite for high-altitude
 > balloon (HAB) payloads — inspired by [Arizona Near Space Research
 > (ANSR)](http://www.ansr.org/) practice and built for the NASA **ASCEND**
 > high-altitude balloon program. Every model is grounded in public/government
@@ -22,9 +22,10 @@ A NASA ASCEND / ANSR balloon flight is a complete aerospace systems-engineering
 problem in miniature: atmospheric modeling, lighter-than-air buoyancy,
 aerodynamics, thermal control, RF link design, trajectory prediction, recovery
 safety, and regulatory compliance. This toolkit turns each of those into a
-small, auditable, reproducible model so a student team can **size a flight,
-predict where it lands, and prove it is safe and legal — before filling a single
-balloon.**
+small, auditable, reproducible model so a student team can explore sizing,
+landing-footprint estimates, and engineering trade-offs before a design review.
+Model output is not flight authorization, a safety determination, or regulatory
+approval.
 
 Everything here runs with **`python3` + `numpy` + `matplotlib`** (no MATLAB
 license, no Simulink, no internet). Run the validation suite and you reproduce
@@ -60,7 +61,7 @@ engineering/
 cd engineering
 python3 -m pip install -r requirements.txt        # numpy + matplotlib
 
-# 1) prove the physics is right (reproduces USSA-1976 tables)
+# 1) check the published-atmosphere regression points and model sanity cases
 python3 tests/test_validation.py
 
 # 2) generate every figure (atmosphere, ascent, descent, thermal, RF, flight)
@@ -86,8 +87,11 @@ margin, predicted range, …).
 | APRS link margin @ 300 km | **+21.8 dB** | closes with margin |
 | Payload interior @ 30 km | **−33 °C** (2 W, α/ε finish) | survivable with heater budget |
 
-The atmosphere model reproduces the **official USSA-1976 pressure table to
-< 0.001 %** at every layer boundary — see `tests/test_validation.py`.
+The atmosphere implementation is regression-checked against the published
+USSA-1976 layer-boundary values. The balloon, descent, thermal, radio, and
+trajectory models are engineering estimates with assumptions and uncertainty;
+their sanity tests are not validation against a specific flight or a substitute
+for independent review.
 
 ---
 
@@ -111,12 +115,27 @@ The atmosphere model reproduces the **official USSA-1976 pressure table to
 ## Design principles
 
 1. **Every constant is cited.** Open `constants.py`; each value names its source.
-2. **Validate against published data.** The atmosphere matches the official
-   tables; the integrated models are sanity-checked against known ANSR/ASCEND
-   flight ranges in `tests/`.
+2. **Make evidence legible.** The atmosphere is checked at published reference
+   points; integrated models are covered by regression and sanity tests in
+   `tests/`. Test coverage does not establish flight readiness.
 3. **No black boxes.** Pure-Python, readable, ~1000 lines total, no compiled
    dependencies.
 4. **Reproducible.** Same inputs → same figures, offline.
+
+5. **Model limitations are visible.** Flight prediction uses a spherical Earth,
+   a static layered wind profile, and simplified ascent/descent physics. It does
+   not assimilate live forecasts, terrain, airspace, launch constraints, or
+   recovery observations. Recheck inputs and independently validate every
+   operational decision.
+
+## Validation and release status
+
+The Python near-space subsystem runs regression checks in GitHub Actions on
+changes to `engineering/`. The validation suite includes atmospheric reference
+points, baseline subsystem checks, vector-based wind interpolation, duplicate
+wind-level rejection, and geodesic behavior across the date line and near a
+pole. This CI does not execute MATLAB/Simulink T-MATS models or certify payload
+hardware.
 
 ---
 

@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from nearspace import atmosphere as atm
 from nearspace import balloon, descent, thermal, comms, lift_gas
-from nearspace.flight import predict_flight, WindLayer
+from nearspace.flight import destination_point, interp_wind, predict_flight, WindLayer
 
 
 def _assert_close(a, b, rtol, msg):
@@ -105,6 +105,37 @@ def test_flight_prediction_runs():
     print(f"[OK] predicted range {fp.range_km:.1f} km, "
           f"burst {fp.burst_alt_m/1000:.1f} km, "
           f"flight {fp.flight_time_s/60:.0f} min")
+
+
+def test_wind_interpolation_uses_vector_physics():
+    # Directions straddling north should remain northerly, not interpolate
+    # through south or produce a spurious full-speed crosswind.
+    u, v = interp_wind([WindLayer(0, 10, 350), WindLayer(1_000, 10, 10)], 500)
+    assert abs(u) < 1e-9, (u, v)
+    assert v < -9.8, (u, v)  # wind from north blows toward south
+
+    # Equal opposite winds should cancel at the midpoint.
+    u, v = interp_wind([WindLayer(0, 10, 0), WindLayer(1_000, 10, 180)], 500)
+    assert math.hypot(u, v) < 1e-9, (u, v)
+
+
+def test_geodesic_displacement_wraps_date_line_and_handles_pole():
+    lat, lon = destination_point(0, 179.999, 500, 0)
+    assert -180 <= lon <= 180
+    assert lon < -179.99, lon
+
+    lat, lon = destination_point(89.999, 45, 100, 0)
+    assert -90 <= lat <= 90
+    assert -180 <= lon <= 180
+
+
+def test_wind_profile_rejects_duplicate_altitudes():
+    try:
+        interp_wind([WindLayer(1_000, 5, 270), WindLayer(1_000, 8, 280)], 1_000)
+    except ValueError as exc:
+        assert "unique" in str(exc)
+    else:
+        raise AssertionError("duplicate wind levels must be rejected")
 
 
 def run_all():
