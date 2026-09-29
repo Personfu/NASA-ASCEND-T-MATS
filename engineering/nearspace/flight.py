@@ -49,6 +49,8 @@ def interp_wind(profile: list[WindLayer], z_m: float):
             raise ValueError("wind layer altitude must be between 0 and 86,000 m")
         if layer.speed_mps < 0:
             raise ValueError("wind speed cannot be negative")
+        if not 0.0 <= layer.direction_from_deg < 360.0:
+            raise ValueError("wind direction must be in [0, 360) degrees")
         if i and layer.altitude_m == ps[i - 1].altitude_m:
             raise ValueError("wind layer altitudes must be unique")
 
