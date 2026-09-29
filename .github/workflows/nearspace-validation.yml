@@ -16,13 +16,19 @@ permissions:
 jobs:
   validate-python-models:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
       - name: Install engineering dependencies
         run: python -m pip install -r engineering/requirements.txt
+      - name: Verify dependency environment
+        run: python -m pip check
       - name: Run atmospheric and flight-model regression suite
         run: python engineering/tests/test_validation.py
       - name: Compile model and test modules
