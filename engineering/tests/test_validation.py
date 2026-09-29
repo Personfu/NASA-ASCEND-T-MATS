@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from nearspace import atmosphere as atm
 from nearspace import balloon, descent, thermal, comms, lift_gas
-from nearspace.flight import destination_point, interp_wind, predict_flight, WindLayer
+from nearspace.flight import destination_point, haversine_km, interp_wind, predict_flight, WindLayer
 
 
 def _assert_close(a, b, rtol, msg):
@@ -144,6 +144,8 @@ def test_wind_profile_rejects_nonphysical_values():
         [WindLayer(1_000, -0.1, 270)],
         [WindLayer(90_000, 5, 270)],
         [WindLayer(1_000, float("nan"), 270)],
+        [WindLayer(1_000, 5, -1)],
+        [WindLayer(1_000, 5, 360)],
     ]
     for profile in invalid_profiles:
         try:
@@ -164,9 +166,7 @@ def test_destination_point_preserves_requested_surface_distance():
     for lat, lon, east, north in cases:
         out_lat, out_lon = destination_point(lat, lon, east, north)
         requested_km = math.hypot(east, north) / 1000.0
-        actual_km = __import__("nearspace.flight", fromlist=["haversine_km"]).haversine_km(
-            lat, lon, out_lat, out_lon
-        )
+        actual_km = haversine_km(lat, lon, out_lat, out_lon)
         _assert_close(actual_km, requested_km, 2e-6, "great-circle displacement distance")
 
 
