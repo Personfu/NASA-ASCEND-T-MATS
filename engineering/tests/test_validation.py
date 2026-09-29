@@ -138,6 +138,49 @@ def test_wind_profile_rejects_duplicate_altitudes():
         raise AssertionError("duplicate wind levels must be rejected")
 
 
+def test_wind_profile_rejects_nonphysical_values():
+    invalid_profiles = [
+        [WindLayer(-1, 5, 270)],
+        [WindLayer(1_000, -0.1, 270)],
+        [WindLayer(90_000, 5, 270)],
+        [WindLayer(1_000, float("nan"), 270)],
+    ]
+    for profile in invalid_profiles:
+        try:
+            interp_wind(profile, 1_000)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"invalid wind profile accepted: {profile}")
+
+
+def test_destination_point_preserves_requested_surface_distance():
+    cases = [
+        (33.45, -112.07, 5_000, 0),
+        (33.45, -112.07, 0, 5_000),
+        (45.0, 170.0, 20_000, -10_000),
+        (-30.0, -179.8, -15_000, 12_000),
+    ]
+    for lat, lon, east, north in cases:
+        out_lat, out_lon = destination_point(lat, lon, east, north)
+        requested_km = math.hypot(east, north) / 1000.0
+        actual_km = __import__("nearspace.flight", fromlist=["haversine_km"]).haversine_km(
+            lat, lon, out_lat, out_lon
+        )
+        _assert_close(actual_km, requested_km, 2e-6, "great-circle displacement distance")
+
+
+def test_zero_displacement_and_invalid_coordinates():
+    assert destination_point(10.0, 20.0, 0.0, 0.0) == (10.0, 20.0)
+    for args in [(91, 0, 1, 0), (0, 181, 1, 0), (0, 0, float("inf"), 0)]:
+        try:
+            destination_point(*args)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"invalid coordinate/displacement accepted: {args}")
+
+
 def run_all():
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     print(f"Running {len(tests)} validation tests...\n")
