@@ -41,37 +41,71 @@ def interp_wind(profile: list[WindLayer], z_m: float):
     if not profile:
         return 0.0, 0.0
     ps = sorted(profile, key=lambda w: w.altitude_m)
+    for i, layer in enumerate(ps):
+        values = (layer.altitude_m, layer.speed_mps, layer.direction_from_deg)
+        if not all(math.isfinite(value) for value in values):
+            raise ValueError("wind layer values must be finite")
+        if layer.altitude_m < 0 or layer.altitude_m > 86_000:
+            raise ValueError("wind layer altitude must be between 0 and 86,000 m")
+        if layer.speed_mps < 0:
+            raise ValueError("wind speed cannot be negative")
+        if not 0.0 <= layer.direction_from_deg < 360.0:
+            raise ValueError("wind direction must be in [0, 360) degrees")
+        if i and layer.altitude_m == ps[i - 1].altitude_m:
+            raise ValueError("wind layer altitudes must be unique")
+
+    def components(layer):
+        # Meteorological direction is the direction the wind comes FROM.
+        to_dir = (layer.direction_from_deg + 180.0) * DEG2RAD
+        return layer.speed_mps * math.sin(to_dir), layer.speed_mps * math.cos(to_dir)
+
     if z_m <= ps[0].altitude_m:
-        w = ps[0]
+        return components(ps[0])
     elif z_m >= ps[-1].altitude_m:
-        w = ps[-1]
+        return components(ps[-1])
     else:
         for i in range(len(ps) - 1):
             if ps[i].altitude_m <= z_m <= ps[i + 1].altitude_m:
                 f = (z_m - ps[i].altitude_m) / (ps[i + 1].altitude_m - ps[i].altitude_m)
-                spd = ps[i].speed_mps + f * (ps[i + 1].speed_mps - ps[i].speed_mps)
-                # interpolate direction via vector components to avoid wraparound
-                a0 = ps[i].direction_from_deg * DEG2RAD
-                a1 = ps[i + 1].direction_from_deg * DEG2RAD
-                x = (1 - f) * math.cos(a0) + f * math.cos(a1)
-                y = (1 - f) * math.sin(a0) + f * math.sin(a1)
-                ang = math.atan2(y, x)
-                w = WindLayer(z_m, spd, ang * RAD2DEG)
-                break
-    # wind blows TOWARD (dir_from + 180). Convert to east/north velocity of air.
-    to_dir = (w.direction_from_deg + 180.0) * DEG2RAD
-    # meteorological bearing: 0 = north, 90 = east
-    u_east = w.speed_mps * math.sin(to_dir)
-    v_north = w.speed_mps * math.cos(to_dir)
-    return u_east, v_north
+                u0, v0 = components(ps[i])
+                u1, v1 = components(ps[i + 1])
+                return u0 + f * (u1 - u0), v0 + f * (v1 - v0)
+    raise ValueError("wind profile interpolation failed")
 
 
 def destination_point(lat_deg, lon_deg, d_east_m, d_north_m):
-    """Advance a lat/lon by small east/north displacement on a sphere."""
+    """Advance a coordinate by an east/north displacement on a sphere.
+
+    Uses the direct great-circle solution so longitude remains well-behaved
+    across the date line and at high latitudes.
+    """
+    if not all(math.isfinite(value) for value in (lat_deg, lon_deg, d_east_m, d_north_m)):
+        raise ValueError("coordinates and displacement must be finite")
+    if not -90.0 <= lat_deg <= 90.0:
+        raise ValueError("latitude must be between -90 and 90 degrees")
+    if not -180.0 <= lon_deg <= 180.0:
+        raise ValueError("longitude must be between -180 and 180 degrees")
+
+    distance_m = math.hypot(d_east_m, d_north_m)
+    if distance_m == 0:
+        return lat_deg, lon_deg
+
     R = EARTH_MEAN_RADIUS
-    dlat = d_north_m / R
-    dlon = d_east_m / (R * math.cos(lat_deg * DEG2RAD))
-    return lat_deg + dlat * RAD2DEG, lon_deg + dlon * RAD2DEG
+    phi1 = lat_deg * DEG2RAD
+    lambda1 = lon_deg * DEG2RAD
+    angular_distance = distance_m / R
+    bearing = math.atan2(d_east_m, d_north_m)
+    sin_phi2 = (
+        math.sin(phi1) * math.cos(angular_distance)
+        + math.cos(phi1) * math.sin(angular_distance) * math.cos(bearing)
+    )
+    phi2 = math.asin(max(-1.0, min(1.0, sin_phi2)))
+    lambda2 = lambda1 + math.atan2(
+        math.sin(bearing) * math.sin(angular_distance) * math.cos(phi1),
+        math.cos(angular_distance) - math.sin(phi1) * math.sin(phi2),
+    )
+    longitude = (lambda2 * RAD2DEG + 180.0) % 360.0 - 180.0
+    return phi2 * RAD2DEG, longitude
 
 
 def haversine_km(lat1, lon1, lat2, lon2):
@@ -80,7 +114,8 @@ def haversine_km(lat1, lon1, lat2, lon2):
     dphi = (lat2 - lat1) * DEG2RAD
     dlmb = (lon2 - lon1) * DEG2RAD
     a = math.sin(dphi / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dlmb / 2) ** 2
-    return 2 * R * math.asin(math.sqrt(a))
+    a = max(0.0, min(1.0, a))
+    return 2 * R * math.atan2(math.sqrt(a), math.sqrt(1.0 - a))
 
 
 @dataclass
